@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="todo-list">
+      <div class="input-group-date" [ngStyle]="{backgroundColor:'lightgray'}">
+          <input [matDatepicker]="picker" [ngModel]="date" >
+          <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+
+      </div>
+      <div class="input-group" >
+        <!-- using local reference -->
+             <!-- <input type="text" placeholder="Todo"  (input)="sayHello()"  #newTodo> // #newTodo is local reference -->
+             <!-- <button class="add-button" (click)="add(newTodo.value)" >+</button> -->
+        <!-- using two-way data binding -->
+        <input type="text" placeholder="Todo"  (input)="sayHello()" [(ngModel)]="newTask">
+        <button class="add-button" (click)="add()" >+</button>
+      </div>
+      <table>
+        <tr *ngFor="let todo of todos ; let i = index" [class.even]="i%2===0" [class.odd]="i%2">
+          <td>
+            <p [class.is-done]="todo.isDone">
+           {{todo.title}}
+            </p>
+          </td>
+          <td>
+            <button class="remove-button" (click)="remove(todo)">X</button>
+            <button class="done-button" (click)="todo.toggleDone()">{{todo.isDone? "Undo":"Done"}} </button>
+          </td>
+        </tr>
+        
+      </table>
+    </div>
+  </div>
