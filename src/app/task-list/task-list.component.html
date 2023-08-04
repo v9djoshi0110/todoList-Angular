@@ -2,14 +2,23 @@
     <div class="todo-list">
       <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm">
         <div class="input-group-date" [ngStyle]="{backgroundColor:'lightgray'}">
-          <input name="date" [matDatepicker]="picker" [ngModel]="date" >
+          <input name="date" readOnly [matDatepicker]="picker" [ngModel]="date" >
           <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
       </div>
       <div class="input-group" >
-        <input name="taskTitle" type="text" placeholder="Todo"  (input)="sayHello()" [(ngModel)]="newTask">
+        <input name="taskTitle" #newTaskName="ngModel" required minlength="3"  type="text" placeholder="Todo"  [(ngModel)]="newTask">
         <button class="add-button" >+</button>
       </div>
+      <div *ngIf="newTaskName.invalid && (newTaskName.touched || newTaskName.dirty)" class="task-validation">
+        <div *ngIf="newTaskName.errors?.['required']">
+          Task name is required!
+        </div>
+        <div *ngIf="newTaskName.errors?.['minlength']">
+          Task name must be at least 3 characters long.
+        </div>
+      </div>
+     
       </form>
       <table>
         <tr *ngFor="let todo of todos ; let i = index" [class.even]="i%2===0" [class.odd]="i%2">
