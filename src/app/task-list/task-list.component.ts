@@ -32,9 +32,6 @@ add = (taskNgform: NgForm)=>{
  if(taskNgform.untouched===true){
   return;
  }
-if(taskNgform.valid===false){
-  return;
-}
     this.todos.push(new Task(this.newTask));
     taskNgform.reset({date: this.date});
  

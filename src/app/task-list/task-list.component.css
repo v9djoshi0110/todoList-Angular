@@ -48,8 +48,13 @@
     background-color: rgb(124, 86, 86);
     font-size: x-large;
     font-weight: bold;
-    /* color: white; */
   }
+  .add-button:disabled {
+    cursor: default;
+    color: gray;
+
+  }
+
   button{
     border-style: none;
     cursor: pointer;
