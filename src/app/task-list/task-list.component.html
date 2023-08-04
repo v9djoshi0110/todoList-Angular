@@ -1,19 +1,16 @@
 <div class="container">
     <div class="todo-list">
-      <div class="input-group-date" [ngStyle]="{backgroundColor:'lightgray'}">
-          <input [matDatepicker]="picker" [ngModel]="date" >
+      <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm">
+        <div class="input-group-date" [ngStyle]="{backgroundColor:'lightgray'}">
+          <input name="date" [matDatepicker]="picker" [ngModel]="date" >
           <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-
       </div>
       <div class="input-group" >
-        <!-- using local reference -->
-             <!-- <input type="text" placeholder="Todo"  (input)="sayHello()"  #newTodo> // #newTodo is local reference -->
-             <!-- <button class="add-button" (click)="add(newTodo.value)" >+</button> -->
-        <!-- using two-way data binding -->
-        <input type="text" placeholder="Todo"  (input)="sayHello()" [(ngModel)]="newTask">
-        <button class="add-button" (click)="add()" >+</button>
+        <input name="taskTitle" type="text" placeholder="Todo"  (input)="sayHello()" [(ngModel)]="newTask">
+        <button class="add-button" >+</button>
       </div>
+      </form>
       <table>
         <tr *ngFor="let todo of todos ; let i = index" [class.even]="i%2===0" [class.odd]="i%2">
           <td>
