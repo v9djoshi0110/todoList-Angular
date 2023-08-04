@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
@@ -26,17 +27,16 @@ export class TaskListComponent implements OnInit {
   new Task('Wash clothes')
 ];
 
-add = ()=>{
-  if(this.newTask){
+add = (taskNgform: NgForm)=>{
+  if(this.newTask && taskNgform.touched===true){
     this.todos.push(new Task(this.newTask));
-    this.newTask = "";
+    taskNgform.reset({date: this.date});
   }else{
     alert('enter proper data!')
   }
 }
 
 remove(removeTodo:Task){
- // this.todos = this.todos.filter(todo => todo !== removeTodo);
  let isConfirmed = confirm(`Are you sure to remove the task: "${removeTodo.title}" from ToDo list ?`);
  if(isConfirmed){
    this.todos.splice(this.todos.indexOf(removeTodo),1);
