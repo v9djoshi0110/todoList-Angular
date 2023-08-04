@@ -1,6 +1,6 @@
 <div class="container">
     <div class="todo-list">
-      <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm">
+      <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm" #taskForm>
         <div class="input-group-date" [ngStyle]="{backgroundColor:'lightgray'}">
           <input name="date" readOnly [matDatepicker]="picker" [ngModel]="date" >
           <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
@@ -8,7 +8,7 @@
       </div>
       <div class="input-group" >
         <input name="taskTitle" #newTaskName="ngModel" required minlength="3"  type="text" placeholder="Todo"  [(ngModel)]="newTask">
-        <button class="add-button" >+</button>
+        <button [disabled]="!taskForm.checkValidity()" class="add-button" >+</button>
       </div>
       <div *ngIf="newTaskName.invalid && (newTaskName.touched || newTaskName.dirty)" class="task-validation">
         <div *ngIf="newTaskName.errors?.['required']">
