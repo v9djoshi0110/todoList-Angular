@@ -28,12 +28,16 @@ export class TaskListComponent implements OnInit {
 ];
 
 add = (taskNgform: NgForm)=>{
-  if(this.newTask && taskNgform.touched===true){
+
+ if(taskNgform.untouched===true){
+  return;
+ }
+if(taskNgform.valid===false){
+  return;
+}
     this.todos.push(new Task(this.newTask));
     taskNgform.reset({date: this.date});
-  }else{
-    alert('enter proper data!')
-  }
+ 
 }
 
 remove(removeTodo:Task){
